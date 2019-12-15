@@ -1,0 +1,87 @@
+
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+struct sNode
+{
+int data;
+struct sNode* next;
+};
+void push(struct sNode** stack,int data)
+{
+    struct sNode* newnode=(struct sNode*)malloc(sizeof(struct sNode));
+    newnode->data=data;
+    newnode->next=*stack;
+    *stack=newnode;
+}
+int pop(struct sNode** stack)
+{
+    int res;
+    struct sNode* top;
+    top=*stack;
+    res=top->data;
+    *stack=top->next;
+    free(top);
+    return res;
+}
+int empty(struct sNode* stack)
+{
+    if(stack==NULL)
+    return 1;
+    else
+    return 0;
+}
+int peek(struct sNode* s)
+{
+    return s->data;
+}
+int main() {
+    int n;
+    scanf("%d",&n);
+    while(n!=0)
+    {
+        int j=0,flag=0;
+        int arr[n],res[n];
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&arr[i]);
+        }
+        struct sNode* s=NULL;
+        int a = 1;
+    int check = true;
+    for(int i = 0; i < n; i++)
+    {
+        while(!empty(s) && peek(s) == a)
+        {
+            a++;
+            pop(&s);
+        }
+        if(arr[i] == a)
+        {
+            a++;
+        }
+         else if(!empty(s) && arr[i] > peek(s))
+        {
+            check = false;
+            break;
+        } 
+        else
+         {
+            push(&s,arr[i]);
+         }
+    }
+    
+    if(check == true){
+        printf("yes\n");
+    } else {
+        printf("no\n");
+    }
+    scanf("%d",&n);
+    }
+    return 0;
+}

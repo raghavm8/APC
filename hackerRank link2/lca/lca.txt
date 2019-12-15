@@ -1,0 +1,121 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+struct treenode{
+     int val;
+      struct treenode *left;
+      struct treenode *right;
+ };
+  
+ struct treenode* treenode_new(int val) {
+      struct treenode* node = (struct treenode *) malloc(sizeof(struct treenode));
+      node->val = val;
+      node->left = NULL;
+      node->right = NULL;
+      return node;
+  }
+ 
+struct treenode* insert( struct treenode* root, int data ) {
+        
+    if(root == NULL) {
+    
+        struct treenode* node = (struct treenode*)malloc(sizeof(struct treenode));
+
+        node->val = data;
+
+        node->left = NULL;
+        node->right = NULL;
+        return node;
+      
+    } else {
+      
+        struct treenode* cur;
+        
+        if(data <= root->val) {
+            cur = insert(root->left, data);
+            root->left = cur;
+        } else {
+            cur = insert(root->right, data);
+            root->right = cur;
+        }
+    
+        return root;
+    }
+}
+int find(struct treenode* A,int B)
+ {
+     if(A==NULL)
+     return 0;
+     if(A->val==B)
+     return 1;
+     
+     return find(A->left,B) || find(A->right,B);
+ }
+ struct treenode* path(struct treenode* A,int B,int C)
+ {
+     if(A==NULL)
+     return NULL;
+     if(A->val==B || A->val==C)
+     return A;
+     
+     struct treenode* x=path(A->left,B,C);
+     struct treenode* y=path(A->right,B,C);
+     if(x && y)
+     return A;
+     if(x!=NULL)
+     return x;
+     if(y!=NULL)
+     return y;
+
+     return 0;
+ }
+int lca(struct treenode* A, int B, int C) 
+{
+    // while(n){
+    // if(find(A,C)&&find(A,B))
+     //{
+         struct treenode* ans=path(A,B,C);
+         return ans->val;
+     //}
+     //else{
+     //return -1;
+     //}
+    //}
+}
+int main() {
+  
+    struct treenode* root = NULL;
+    
+    int t;
+    int data;
+
+    scanf("%d", &t);
+
+    while(t-- > 0) {
+        scanf("%d", &data);
+        root = insert(root, data);
+    }
+    int n,a,b;
+    scanf("%d",&n);
+    int c=0;
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d %d",&a,&b);
+        if(find(root,a)&&find(root,b))
+        c=lca(root,a,b);
+        else if(root->val==a||root->val==b)
+        c=-1;
+        else
+        c=-1;
+        /*if(c==a || c==b)
+        printf("-1");
+        else*/
+        printf("%d",c);
+        printf("\n");
+    }
+    return 0;
+}
