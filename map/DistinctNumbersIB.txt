@@ -1,0 +1,28 @@
+public class Solution {
+    public int[] dNums(int[] A, int B) {
+        int i;
+        HashMap<Integer,Integer> map = new HashMap();
+        int j=0,n = A.length;
+        int[] ans = new int[n-B+1];
+        for(i=0;i<B;i++)
+        {
+            if(map.containsKey(A[i]))
+                map.replace(A[i],map.get(A[i])+1);
+            else
+                map.put(A[i],1);
+        }
+        ans[j++] = map.size();
+        for(i=B;i<n;i++)
+        {
+            map.replace(A[i-B],map.get(A[i-B])-1);
+            if(map.get(A[i-B]) == 0)
+                map.remove(A[i-B]);
+            if(!map.containsKey(A[i]))
+                map.put(A[i],1);
+            else
+                map.replace(A[i],map.get(A[i])+1);
+            ans[j++] = map.size();
+        }
+        return ans;
+    }
+}
