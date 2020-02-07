@@ -18,10 +18,10 @@ void insertAtEnd(struct node** h,int d)
     n->data=d;
     n->next=NULL;
 	//printf("%d\n",**h);
-//	int i=0;
+   //int i=0;
 	if(*h==NULL)
     *h=n;
-      else
+    else
     {
         struct node *curr=*h;
         while(curr->next!=NULL)

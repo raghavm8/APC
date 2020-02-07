@@ -35,11 +35,11 @@ void deleteAtPos(struct node **h,int p)
             c=c->next;
             i++;
         }
-        /*if(p<1||(c==NULL&&c->next==NULL))
+        if(p<1||(c==NULL&&c->next==NULL))
         {
-            ;  //commented for sum test case but to be written
+             //commented for sum test case but to be written;
         }
-        else*/
+        else
         {
             c->next=c->next->next;
         }
