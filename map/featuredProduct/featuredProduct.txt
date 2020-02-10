@@ -1,0 +1,65 @@
+
+class Result {
+
+    /*
+     * Complete the 'featuredProduct' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING_ARRAY products as parameter.
+     */
+
+    public static String featuredProduct(List<String> p) {
+    // Write your code here
+        HashMap<String,Integer> map= new HashMap();
+            int i=0;
+            int n=p.size();
+            for(i=0;i<n;i++)
+            {
+                if(map.containsKey(p.get(i)))
+                map.replace(p.get(i),map.get(p.get(i))+1);
+                else
+                map.put(p.get(i), 1);
+            }
+            int max=0;
+            for (String id : map.keySet()) 
+            {
+                System.out.println(id +" "+map.get(id));
+            }
+
+            for(i=0;i<n;i++)
+            {
+                if(map.get(p.get(i))>max)
+                max = map.get(p.get(i));
+            }
+            int j=0,m = map.size();
+            String[] st = new String[m];
+            System.out.println(max);
+            //Collections.sort(a);
+            //i=0;
+            /*for(i=0;i<m;i++)
+            {
+                if(max == map.get(p.get(i)));
+                st[j++] = p.get(i);
+            }*/
+            for(String id : map.keySet())
+            {
+                if(max == map.get(id))
+                st[j++] = id;
+            }
+
+            for(i=0;i<j;i++)
+            System.out.println(st[i]);
+
+            ArrayList<String> a = new ArrayList<String>();
+      //  int s = st.length;
+        for(i=0;i<j;i++)
+        a.add(st[i]);
+        Collections.sort(a);
+           
+        return a.get(j-1);
+
+    }
+
+}
+
+public class Solution {

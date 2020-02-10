@@ -11,7 +11,7 @@ int search(int n,int a[10],int s,int e,int k)
 			else if(a[mid] > k)
 				e = mid - 1;
 			else
-			    ans = mid;
+			   return mid;
 	   }
 	   return ans;
 }
