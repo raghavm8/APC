@@ -1,0 +1,58 @@
+public class Solution {
+    public int[] solve(int[] a, int[] b) {
+        int n=a.length;
+        
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        for(int i=0;i<n;i++)
+        al.add(b[i]);
+        HashMap<Integer,ArrayList<Integer>> h = new HashMap<Integer,ArrayList<Integer>>();
+       // System.out.println("al = " + al);
+        for(int i=0;i<n;i++)
+        {
+            if(!h.containsKey(a[i]))
+            h.put(a[i],al);
+            else
+            {
+                ArrayList<Integer> o = (ArrayList)h.get(a[i]).clone();
+                o.addAll(al);
+                //System.out.println("O = "+o);
+                h.replace(a[i],o);
+                //System.out.println("O update" + h.get(a[i]));
+            }
+        }
+        
+       /* for(int c: h.keySet())
+        System.out.println(c + " " + h.get(c));*/
+        
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for(int c:h.keySet())
+        {
+            ArrayList<Integer> x = h.get(c);
+            for(int j=0;j<x.size();j++)
+              {  
+                //System.out.print(x.get(j)+c + " ");
+                //x.set(j,x.get(j)+c);
+               // System.out.println("x = " + x);
+               int y=x.get(j)+c;
+               res.add(y);
+               
+              }
+              //System.out.println();
+             // System.out.println("res = "+ res);
+        }
+      //  System.out.println(res);
+        int k=0,i=0;
+        int ans[] = new int[n];
+        Collections.sort(res);
+       //System.out.println(res);
+        int m=res.size();
+        while(k!=n)
+        {
+            ans[k]=res.get(m-i-1);
+            k++;
+            i++;
+        }
+      //  System.out.println();
+        return ans;
+    }
+}
