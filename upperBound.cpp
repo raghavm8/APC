@@ -7,7 +7,7 @@ int upperBound(int n,int a[10],int s,int e,int k)
 			mid = (s+e)/2;
 			if(a[mid] <= k)
 			{
-				ans = k;
+				ans = mid;
 				s = mid + 1;
 			}
 			else if (a[mid] > k)

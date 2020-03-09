@@ -1,0 +1,65 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    public static String[] remove(String[] s,int a,int b)
+    {
+        String[] st = new String[s.length-2];
+        int k=0;
+        if(s==null||a>s.length||b>s.length||a<0||b<0)
+        return s;
+        int n=s.length;
+        for(int i=0;i<n;i++)
+        {
+            if(i==a||i==b)
+            continue;
+            st[k++] = s[i];
+        }
+        return st;
+    }
+	public static void main (String[] args) {
+		int t;
+		Scanner s = new Scanner(System.in);
+		t=s.nextInt();
+		for(int l=0;l<t;l++)
+		{
+		   int n=s.nextInt();
+		   String str[] = new String[n];
+		   for(int i=0;i<n;i++)
+		       str[i] = s.next();
+		       
+		   /*String st[] = str;
+		   while((str.length/2)!=0)   
+		   {
+		   for(int i=0;i<n-1;i++)
+		   {
+		       if(str[i].equals(str[i+1]))
+		       {
+		            st = remove(str,i,i+1);
+		       }
+		   }
+		   if(st.length==str.length)
+		   break;
+		   }
+		   n=st.length;
+		   System.out.println(n);*/
+		   /*for(int i=0;i<n;i++)
+		   System.out.print(st[i] + " ");
+		   System.out.println();*/
+		   Stack<String> st = new Stack<String>();
+		   /*for(int i=0;i<n;i++)
+		   s.push(str[i]);*/
+	 n = str.length;
+		   for(int i=0;i<n;i++)
+            {
+              String a = str[i];
+              if(st.empty() == false && a.equals(st.peek()))
+              st.pop();
+              else
+              st.push(a);
+            }
+            System.out.println(st.size());
+		}
+	}
+}
