@@ -1,0 +1,86 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    public static String decode(String a)
+    {
+        int count=0;
+        Stack<Character> s = new Stack<>();
+        Stack<Integer> ns = new Stack<>();
+        String res = "";
+        String temp = "";
+        for(int i=0;i<a.length();i++)
+        {
+            count=0;
+            if(a.charAt(i)>='0' && a.charAt(i)<='9')
+            {
+                while(a.charAt(i)>='0' && a.charAt(i)<='9')
+                {
+                    count = count*10 + Character.getNumericValue(a.charAt(i));
+                    i++;
+                }
+                i--;
+                ns.push(count);
+               // System.out.println(" count = "+count);
+            }
+            else if(a.charAt(i) == ']')
+            {
+                count=0;
+                temp="";
+                if(ns.empty()==false)
+                {
+                    count=ns.peek();
+                    ns.pop();
+                }
+                while(s.empty()==false && s.peek()!='[')
+                {
+                    temp = s.peek()+temp;
+                    s.pop();
+                }
+                if(s.empty()==false && s.peek()=='[')
+                s.pop();
+                for(int j=0;j<count;j++)
+                res += temp;
+                for(int j=0;j<res.length();j++)
+                s.push(res.charAt(j));
+                //System.out.println("res = " + res);
+                res="";
+            }
+            else if(a.charAt(i) == '[')
+            {
+                if(a.charAt(i-1)>='0' && a.charAt(i-1)<='9')
+                s.push(a.charAt(i));
+                else
+                {
+                    s.push(a.charAt(i));
+                    ns.push(1);
+                }
+            }
+            else
+                s.push(a.charAt(i));
+            
+        }
+        //System.out.println(s);
+        while(s.empty()==false)
+        {
+            res = s.peek()+res;
+            s.pop();
+        }
+     
+        return res;
+    }
+	public static void main (String[] args) {
+        int t;
+        Scanner sc = new Scanner(System.in);
+        t=sc.nextInt();
+        for(int l=0;l<t;l++)
+        {
+            String s = sc.next();
+            String str = decode(s);
+            System.out.println(str);
+        }
+	}
+}
