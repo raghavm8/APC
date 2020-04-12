@@ -38,8 +38,7 @@ public class Main{
         boolean vis[] = new boolean[v];
         boolean res[] = new boolean[v];
         
-        int i;
-        for(i=0;i<v;i++)
+        for(int i=0;i<v;i++)
             if(checkCycle(i,vis,res))
                 return true;
         return false;

@@ -7,8 +7,7 @@ import java.util.*;
         {
             v=b;
             al = new LinkedList[v];
-            int i;
-            for(i=0;i<v;i++)
+            for(int i=0;i<v;i++)
             {
                 al[i] = new LinkedList<Integer>();
             }

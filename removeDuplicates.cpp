@@ -17,7 +17,7 @@ int main()
 	cin>>a[i];
 	qsort(a,n,sizeof(int),cmp);
 	for(i=0;i<n;i++)
-	cout<<a[i];
+	cout<<a[i]<<" ";
 	cout<<"\n";
 		for(i=0;i<n;i++)
 		{
